@@ -1,0 +1,32 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+
+@{
+    var result = await authorizationService.AuthorizeAsync(this.User, "ViewManageMenu");
+}
+
+@if(result.Succeeded)
+{
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Quản lý
+        </button>
+
+        <ul class="dropdown-menu">
+        <li>
+            <a class="dropdown-item py-2" asp-action="Index" asp-controller="DbManage" asp-area="Database">
+                Cơ sở dữ liệu
+            </a>
+            <a class="dropdown-item py-2" asp-action="Index" asp-controller="Contact" asp-area="Contact">
+                Quản lý liên hệ
+            </a>
+            <a class="dropdown-item py-2" asp-action="Index" asp-controller="Role" asp-area="Identity">
+                Quản lý Role
+            </a>
+            <a class="dropdown-item py-2" asp-action="Index" asp-controller="User" asp-area="Identity">
+                Quản lý User
+            </a>
+        </li>
+    </ul>
+    </div>
+}
